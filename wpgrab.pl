@@ -88,3 +88,19 @@ if($getheme =~/\/themes\/(.*?)\//){
   print color('bold white'),"Can't Get Theme\n";
  }
 }
+
+
+############### GET PLUGIN ###############
+sub Plugin(){
+$getplugin = $ua->get($site)->content;
+
+my %seen;
+while($getplugin =~m/\/wp-content\/plugins\/(.*?)\//g){ 
+  $plu=$1;
+  next if $seen{$plu}++; # already seen
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Plugin: $plu \n";
+ }
+}
