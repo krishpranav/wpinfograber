@@ -36,3 +36,38 @@ print q(
 sub help(){
 print color('bold white'), " Usage perl wpgrab.pl -u http://website.com"
 }
+
+
+##### GET USER #####
+sub user(){
+$user = $site . '/?author=1';
+
+$getuser = $ua->get($user)->content;
+if($getuser =~/author\/(.*?)\//){
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"User: $1\n";
+   }else{
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Can't Get Username\n";
+  }
+}
+
+###### GET VERSION #####
+sub Version(){
+$getversion = $ua->get($site)->content;
+if($getversion =~/content="WordPress (.*?)"/) {
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Version: $1\n";
+ }else{
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Can't Get Version\n";
+ }
+}
