@@ -38,7 +38,7 @@ print color('bold white'), " Usage perl wpgrab.pl -u http://website.com"
 }
 
 
-##### GET USER #####
+############### GET VERSION ###############
 sub user(){
 $user = $site . '/?author=1';
 
@@ -56,7 +56,7 @@ if($getuser =~/author\/(.*?)\//){
   }
 }
 
-###### GET VERSION #####
+############### GET VERSION ###############
 sub Version(){
 $getversion = $ua->get($site)->content;
 if($getversion =~/content="WordPress (.*?)"/) {
@@ -69,5 +69,22 @@ if($getversion =~/content="WordPress (.*?)"/) {
   print color('bold green'),"+";
   print color('bold red'),"] ";
   print color('bold white'),"Can't Get Version\n";
+ }
+}
+
+
+############### GET THEME ###############
+sub Theme(){
+$getheme = $ua->get($site)->content;
+if($getheme =~/\/themes\/(.*?)\//){
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Theme: $1\n";
+}else{
+  print color('bold red')," [";
+  print color('bold green'),"+";
+  print color('bold red'),"] ";
+  print color('bold white'),"Can't Get Theme\n";
  }
 }
